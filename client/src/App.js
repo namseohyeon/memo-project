@@ -1,8 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 import './App.css';
 import plus from './plus.png';
 import Modal from './components/Modal';
-import ReModal from './components/ReModal';
+//import ReModal from './components/ReModal';
+//import UserList from './components/UserList';
 
 class App extends React.Component {
   constructor(props){
@@ -12,11 +13,13 @@ class App extends React.Component {
       reModalOpen: false,
       memos:[
         {
+          id : 1,
           title: "첫번째 메모",
           author: "ty",
           content: "필라테스 4시"
         },
         {
+          id:2,
           title: "두번째 메모",
           author: "ty",
           content: "웨이트 OT 6시"
@@ -66,6 +69,12 @@ class App extends React.Component {
     console.log(index);
     console.log(change_memo);
   }
+  handleDelete = (comment) => {
+    const memos = this.state.memos.filter(
+      (memos) => memos.index !== comment.id
+    );
+    this.setState({memos});
+  }
 
   render(){
     return(
@@ -86,6 +95,10 @@ class App extends React.Component {
                         <br/>
                         <h4>{memo.content}</h4>
                         <br/>
+                        <div>
+                          {/* <UserList users={users} onRemove={onRemove} /> */}
+                          <button type="button" id='del' onClick={this.handleDelete}>삭제</button>
+                        </div>
                       </div>
                     </td>
                   )}
@@ -100,8 +113,8 @@ class App extends React.Component {
             <main className='App'>
               <Modal isOpen={this.state.isModalOpen} close={this.closeModal} 
                     onCreate={this.handleCreate}/>
-              <ReModal reOpen={this.state.reModalOpen} close={this.recloseModal} 
-                    data={this.state.clickmemo} onUpdate={this.handleUpdate}/>
+              {/* <ReModal reOpen={this.state.reModalOpen} close={this.recloseModal} 
+                    data={this.state.clickmemo} onUpdate={this.handleUpdate}/> */}
             </main>
         </div>
       </div>
